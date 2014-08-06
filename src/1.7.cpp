@@ -3,8 +3,9 @@
 
 using namespace std;
 
-void propagate_zeroes(vector<int> &M, int m, int n) {
-	vector<bool> zeroed(m * n, false);
+void propagate_zeroes(int *M, int m, int n) {
+	bool zeroed[m * n];
+	for(int i = 0; i < m * n; i++) zeroed[i] = false;
 	for(int y = 0; y < m; y++) {
 		for(int x = 0; x < n; x++) {
 			if(zeroed[y * n + x]) continue;
@@ -22,7 +23,7 @@ void propagate_zeroes(vector<int> &M, int m, int n) {
 	}
 }
 
-void print(const vector<int> &M, int m, int n) {
+void print(int *M, int m, int n) {
 	for(int y = 0; y < m; y++) {
 		for(int x = 0; x < n; x++) {
 			cout << M[y * n + x] << '\t';
@@ -35,7 +36,7 @@ int main() {
 	int m = 6, n = 5;
 	int mod = 12;
 
-	vector<int> M(m * n);
+	int M[m * n];
 	
 	int i = 0;
 	for(int y = 0; y < m; y++) {
