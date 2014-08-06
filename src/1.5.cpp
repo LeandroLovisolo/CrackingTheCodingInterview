@@ -19,8 +19,10 @@ string compress(const string &s) {
 			repetitions++;
 		}
 		if(s[i - 1] != s[i] || i == s.length() - 1) {
-			string n(repetitions + 1);
-			compressed + s[i - 1] + n;
+			compressed += to_string(repetitions + 1);
+			if(i != s.length() - 1) {
+				compressed += s[i];
+			}
 			repetitions = 0;
 		}
 	}

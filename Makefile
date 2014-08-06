@@ -1,5 +1,5 @@
 CPP = g++
-CPPFLAGS = -ggdb
+CPPFLAGS = -std=c++11 -ggdb
 BIN = $(CPP) $(CPPFLAGS) $^ -o $@
 
 ALL = bin/1.1.1 \
