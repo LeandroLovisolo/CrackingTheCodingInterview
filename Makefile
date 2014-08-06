@@ -1,11 +1,16 @@
 CPP = g++
-CPPFLAGS = -ggdb -o
-CC = $(CPP) $(CPPFLAGS)
+CPPFLAGS = -ggdb
+BIN = $(CPP) $(CPPFLAGS) $^ -o $@
 
-all: 1-1
+ALL = 1-1-1 1-1-2 
 
-1-1: 1-1.cpp
-	$(CC) 1-1 1-1.cpp
+all: $(ALL)
+
+1-1-1: 1-1-1.cpp
+	$(BIN)
+
+1-1-2: 1-1-2.cpp
+	$(BIN)
 
 clean:
-	rm -f 1-1
+	rm -f $(ALL)
