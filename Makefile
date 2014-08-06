@@ -2,7 +2,7 @@ CPP = g++
 CPPFLAGS = -ggdb
 BIN = $(CPP) $(CPPFLAGS) $^ -o $@
 
-ALL = 1-1-1 1-1-2 1-2 1-3
+ALL = 1-1-1 1-1-2 1-2 1-3 1-4
 
 all: $(ALL)
 
@@ -16,6 +16,9 @@ all: $(ALL)
 	$(BIN)
 
 1-3: 1-3.cpp
+	$(BIN)
+
+1-4: 1-4.cpp
 	$(BIN)
 
 clean:
