@@ -4,29 +4,28 @@
 using namespace std;
 
 string compress(const string &s) {
-	string compressed;
-	int repetitions = 0;
+	string compressed(s.length() * 2, ' ');
+	int repetitions, j = 0;
 	for(int i = 0; i < s.length(); i++) {
-		if(i == 0 || (repetitions == 0 && s[i - 1] != s[i])) {
-			compressed += s[i];
-			continue;
-		}
-		if(repetitions == 0 && s[i - 1] == s[i]) {
-			repetitions++;
-			continue;
-		}
-		if(s[i - 1] == s[i]) {
-			repetitions++;
-		}
-		if(s[i - 1] != s[i] || i == s.length() - 1) {
-			compressed += to_string(repetitions + 1);
-			if(i != s.length() - 1) {
-				compressed += s[i];
+		if(i == 0) {
+			compressed[j++] = s[i];
+			repetitions = 1;
+		} else if(s[i - 1] != s[i]) {
+			string n = to_string(repetitions);
+			for(int k = 0; k < n.length(); k++) {
+				compressed[j++] = n[k];
 			}
-			repetitions = 0;
+			compressed[j++] = s[i];
+			repetitions = 1;
+		} else {
+			repetitions++;
 		}
 	}
-	return compressed;
+	string n = to_string(repetitions);
+	for(int k = 0; k < n.length(); k++) {
+		compressed[j++] = n[k];
+	}
+	return string(compressed, 0, j);
 }
 
 int main(int argc, char **argv) {
