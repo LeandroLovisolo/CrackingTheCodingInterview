@@ -11,7 +11,8 @@ ALL = bin/1.1.1 \
       bin/1.6   \
       bin/1.7   \
       bin/1.8   \
-      bin/2.1.1
+      bin/2.1.1 \
+      bin/2.1.2
 
 all: $(ALL)
 
