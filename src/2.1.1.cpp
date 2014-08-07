@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <set>
+#include <unordered_set>
 
 using namespace std;
 
@@ -10,7 +10,7 @@ struct node {
 };
 
 void remove_duplicates(node *list) {
-	set<int> values;
+	unordered_set<int> values;
 	node *prev = NULL;
 	while(list != NULL) {
 		if(values.find(list->value) == values.end()) {
