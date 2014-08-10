@@ -1,4 +1,4 @@
 CrackingTheCodingInterview
 ==========================
 
-My solution to various problems from the Cracking the Coding Interview book, by Gayle Laakmann McDowell.
+My solutions to various problems from the book Cracking the Coding Interview, by Gayle Laakmann McDowell.
