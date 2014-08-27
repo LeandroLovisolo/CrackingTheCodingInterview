@@ -1,4 +1,4 @@
-// Binary search algorithm.
+// Binary search algorithm (recursive).
 // http://en.wikipedia.org/wiki/Binary_search_algorithm
 
 #include <iostream>
@@ -24,7 +24,7 @@ int main() {
     cout << endl;
 
     for(int x = v[0]; x <= v[v.size() - 1]; x++) {
-        cout << x << " index: " << binarySearch(v, 0, v.size(), x) << endl;
+        cout << x << " index:" << binarySearch(v, 0, v.size(), x) << endl;
     }
 
     return 0;
