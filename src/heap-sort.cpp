@@ -1,7 +1,6 @@
 // Heap sort algorithm.
 // http://en.wikipedia.org/wiki/Heap_sort
 
-
 #include <iostream>
 #include <vector>
 
