@@ -14,8 +14,10 @@ void swap(vector<int> &v, int i, int j) {
 
 void insertionsort(vector<int> &v) {
     for(int i = 0; i < v.size(); i++) {
-        for(int j = i; j >= 0; j--) {
-            if(v[j - 1] > v[j]) swap(v, j - 1, j);
+        int j = i;
+        while(j > 0 && v[j - 1] > v[j]) {
+            swap(v, j - 1, j);
+            j--;
         }
     }
 }
