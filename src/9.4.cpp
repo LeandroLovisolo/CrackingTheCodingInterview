@@ -41,7 +41,6 @@ void printPowerset(const vector<int> &set, int start) {
     }
 }
 
-
 int main() {
     vector<int> set {1, 2, 3, 4, 5};
     printPowerset(set, 0);
