@@ -3,32 +3,42 @@
 
 using namespace std;
 
-void printCurrentSet(const vector<int> &set, const vector<bool> &current) {
+void addCurrent(const vector<int> &set,
+                vector<vector<int>> &powerset,
+                const vector<bool> &currentMask) {
+    vector<int> current;
     for(int i = 0; i < set.size(); i++) {
-        if(current[i]) cout << set[i];
-        else           cout << " ";
+        if(currentMask[i]) current.push_back(set[i]);
     }
-    cout << endl;
+    powerset.push_back(current);
 }
 
-void printPowersetRec(const vector<int> &set, vector<bool> &current, int start) {
+void powersetRec(const vector<int> &set, vector<vector<int>> &powerset,
+                 vector<bool> &currentMask, int start) {
     if(start == set.size()) {
-        printCurrentSet(set, current);
+        addCurrent(set, powerset, currentMask);
         return;
     }
 
     // include start
-    current[start] = true;
-    printPowersetRec(set, current, start + 1);
-    current[start] = false;
+    currentMask[start] = true;
+    powersetRec(set, powerset, currentMask, start + 1);
+    currentMask[start] = false;
 
     // exclude start
-    printPowersetRec(set, current, start + 1);
+    powersetRec(set, powerset, currentMask, start + 1);
 }
 
 void printPowerset(const vector<int> &set, int start) {
-    vector<bool> current(set.size(), false);
-    printPowersetRec(set, current, 0);
+    vector<bool> currentMask(set.size(), false);
+    vector<vector<int>> powerset;
+
+    powersetRec(set, powerset, currentMask, 0);
+
+    for(auto set : powerset) {
+        for(auto element : set) cout << element;
+        cout << endl;
+    }
 }
 
 
