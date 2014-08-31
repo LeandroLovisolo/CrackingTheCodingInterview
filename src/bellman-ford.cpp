@@ -8,32 +8,31 @@
 
 using namespace std;
 
-typedef vector<vector<pair<int, int>>> graph;
+typedef pair<int, int> edge;
+typedef vector<vector<edge>> graph;
+typedef vector<int> predecessors;
+typedef vector<int> distances;
 
-pair<int, int> edge(int to, int weight) {
-    return make_pair(to, weight);
-}
-
-tuple<bool, vector<int>, vector<int>> bellmanFord(const graph &g, int from) {
-    vector<int> predecessors(g.size(), -1);
-    vector<int> distances(g.size(), INT_MAX);
-    distances[from] = 0;
+tuple<bool, predecessors, distances> bellmanFord(const graph &g, int from) {
+    predecessors ps(g.size(), -1);
+    distances ds(g.size(), INT_MAX);
+    ds[from] = 0;
 
     for(int i = 1; i < g.size(); i++) {
         for(int u = 0; u < g.size(); u++) {
-            for(pair<int, int> e : g[u]) {
-                if(distances[u] == INT_MAX) continue;
-                if(distances[e.first] > distances[u] + e.second) {
-                    distances[e.first] = distances[u] + e.second;
-                    predecessors[e.first] = u;
+            for(edge e : g[u]) {
+                if(ds[u] == INT_MAX) continue;
+                if(ds[e.first] > ds[u] + e.second) {
+                    ds[e.first] = ds[u] + e.second;
+                    ps[e.first] = u;
                 }
             }
         }
     }
 
     for(int u = 0; u < g.size(); u++) {
-        for(pair<int, int> e : g[u]) {
-            if(distances[e.first] > distances[u] + e.second) {
+        for(edge e : g[u]) {
+            if(ds[e.first] > ds[u] + e.second) {
                 // Negative cycle found
                 return make_tuple(false, vector<int>(), vector<int>());
             }
@@ -41,7 +40,7 @@ tuple<bool, vector<int>, vector<int>> bellmanFord(const graph &g, int from) {
     }
 
     // No negative cycles
-    return make_tuple(true, predecessors, distances);
+    return make_tuple(true, ps, ds);
 }
 
 int main() {
@@ -66,21 +65,21 @@ int main() {
     //                |                |
     //                +----------------+
 
-    graph g {{edge(1, 5),  edge(4, 7) },
-             {edge(2, 5),  edge(3, -4), edge(4, 8)},
-             {edge(1, -2)},
-             {edge(0, 2),  edge(2, 7)},
-             {edge(2, -3), edge(3, 9)}};
+    graph g {{{1, 5},  {4, 7}},
+             {{2, 5},  {3, -4}, {4, 8}},
+             {{1, -2}},
+             {{0, 2},  {2, 7}},
+             {{2, -3}, {3, 9}}};
 
-    tuple<bool, vector<int>, vector<int>> result = bellmanFord(g, 0);
+    tuple<bool, predecessors, distances> result = bellmanFord(g, 0);
     bool noNegativeCycles = get<0>(result);
-    vector<int> predecessors = get<1>(result);
-    vector<int> distances = get<2>(result);
+    predecessors ps = get<1>(result);
+    distances ds = get<2>(result);
 
     if(noNegativeCycles) {
         cout << "Vertex\tPredecessor\tDistance" << endl;
         for(int i = 0; i < g.size(); i++)
-            cout << i << "\t" << predecessors[i] << "\t\t" << distances[i] << endl;
+            cout << i << "\t" << ps[i] << "\t\t" << ds[i] << endl;
     } else {
         cout << "Negative cycle detected." << endl;
     }
