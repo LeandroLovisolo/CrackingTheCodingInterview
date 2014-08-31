@@ -20,8 +20,8 @@ tuple<bool, predecessors, distances> bellmanFord(const graph &g, int from) {
 
     for(int i = 1; i < g.size(); i++) {
         for(int u = 0; u < g.size(); u++) {
+            if(ds[u] == INT_MAX) continue;
             for(edge e : g[u]) {
-                if(ds[u] == INT_MAX) continue;
                 if(ds[e.first] > ds[u] + e.second) {
                     ds[e.first] = ds[u] + e.second;
                     ps[e.first] = u;
